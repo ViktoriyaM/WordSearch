@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status = "warn" 
+               name = "builder"
+               packages = "">   
+    
+    <Properties>
+        <Property name = "log-path">logger</Property>
+    </Properties>
+
+    <Appenders>  
+        <!--
+        <Console name = "Console-Appender"
+                 target = "SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%-5p][%-16.16t][%30c{-2}] - %m%n</Pattern> 
+            </PatternLayout>
+        </Console>
+       
+        <File name = "File-Appender"
+              filename = "${log-path}/mapBuilder.log">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%-5p][%-16.16t][%30c{-2}] - %m%n</Pattern> 
+            </PatternLayout>
+        </File>
+        --> 
+        <RollingFile name = "RollingFile" 
+                     fileName = "${log-path}/wordSearch.log"
+                     filePattern = "${log-path}/$${date:yyyy-MM}/wordSearch-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%-5p][%-16.16t][%30c{-2}] - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max = "30"/>
+        </RollingFile>
+    </Appenders>
+    
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref = "RollingFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
